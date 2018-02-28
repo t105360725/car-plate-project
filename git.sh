@@ -1,3 +1,3 @@
 git add --all
-git commit -m date -u
+git commit --amend --date="$(date -R)"
 git push -u origin master
