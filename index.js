@@ -1,5 +1,9 @@
 'use strict'
 
+// Shotting 
+const exec = require('child_process').exec;
+var shots = () => exec('sh shot.sh');
+
 const path = require('path')
 const chokidar = require('chokidar')
 const watcher = chokidar.watch(path.join(__dirname, './lps/*.*'))
@@ -19,6 +23,9 @@ var config = {
 firebase.initializeApp(config);
 var db = firebase.database();
 var ref = db.ref("/");
+
+// Shotting
+shots()
 
 // Start openalpr
 openalpr.Start ()
