@@ -34,15 +34,21 @@ watcher.on('ready', () => {
 		var str = path;
 		var res = str.split("/")
 		var path = "lps/" + res[5]
+		var result = {}
 		openalpr.IdentifyLicense (path, function (error, output) {
 			var results = output.results;
 			if (results.length > 0) {
-				console.log("Processing time: " + output.processing_time_ms + " Number Plate: " + results[0].plate)
-				let current_time_stamp = new Date().getTime()
-				res.number = results[0].plate
-				res.time = parseInt(current_time_stamp / 1000)
-				ref.push(res)
-				console.log("Upload success!")
+				for (var i = 0; i < results.length; i++) {
+					console.log(results[i].plate)
+					let current_time_stamp = new Date().getTime()
+					result.number = results[i].plate
+					result.time = parseInt(current_time_stamp / 1000)
+					ref.push(result)
+					console.log(result)
+					console.log("Upload success!")
+				}
+				// console.log(result)
+				// console.log("Processing time: " + output.processing_time_ms + " Number Plate: " + results[0].plate)
 			}
 			else {
 				console.log ("No results");
